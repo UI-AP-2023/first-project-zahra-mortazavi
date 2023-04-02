@@ -5,6 +5,7 @@ import com.sun.org.apache.bcel.internal.generic.SWITCH;
 import java.util.Scanner;
 
 public class MainMenu {
+
    RegisterView registerView=new RegisterView();
     Scanner s=new Scanner(System.in);
 public String mainMenu(){
