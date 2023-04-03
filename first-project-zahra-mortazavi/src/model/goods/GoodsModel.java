@@ -84,11 +84,5 @@ private int goodsInventory;
                 ;
     }
 
-    public String firstLevelToString() {
 
-        return "\ngoodsName='" + goodsName + '\'' +
-                "\ngoodsCategoryModel=" + goodsCategoryModel.getCategory() +
-                "\ngoodsPrice=" + goodsPrice
-                ;
-    }
 }
