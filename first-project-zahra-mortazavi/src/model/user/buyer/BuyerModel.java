@@ -6,7 +6,7 @@ import  model.user.UserModel;
 import java.util.ArrayList;
 
 public class BuyerModel extends UserModel {
-    BuyerModel(String userName,String passWord,String email,String phoneNumber){
+    public BuyerModel(String userName,String passWord,String email,String phoneNumber){
         super(userName,passWord,email,phoneNumber);
         cart=new ArrayList<GoodsModel>();
         purchaseHistory=new ArrayList<PurchaseInvoiceModel>();

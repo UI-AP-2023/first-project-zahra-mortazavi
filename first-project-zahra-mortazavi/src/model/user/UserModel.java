@@ -1,7 +1,10 @@
 package model.user;
 
-public abstract class UserModel {
+import model.request.Request;
+
+public abstract class UserModel extends Request {
    protected UserModel(String userName,String passWord,String email,String phoneNumber){
+       super();
       this.userName=userName;
       this.email=email;
       this.passWord=passWord;

@@ -1,9 +1,11 @@
 package model.goods;
 
+import model.request.Request;
 import model.user.buyer.BuyerModel;
 
-public class CommentModel {
-    CommentModel(BuyerModel buyerModel, int goodsId, boolean purchaseStatus,String commentText){
+public class CommentModel extends Request{
+    public CommentModel(BuyerModel buyerModel, int goodsId, boolean purchaseStatus,String commentText){
+        super();
         this.buyerModel=buyerModel;
         this.goodsId=goodsId;
         this.purchaseStatus=purchaseStatus;
@@ -48,4 +50,10 @@ public class CommentModel {
         return buyerModel;
     }
 
+    @Override
+    public String toString() {
+        return     "\nname="+buyerModel.getUserName() +
+                "\ngoodsId=" + goodsId +
+                "\ncommentText='" + commentText + '\'' ;
+    }
 }
