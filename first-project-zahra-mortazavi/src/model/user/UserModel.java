@@ -28,13 +28,13 @@ UserModel(String userName,String passWord)
    public String getEmail(){
        return email;
    }
-   public void setPhoneNumber(){
+   public void setPhoneNumber(String phoneNumber){
        this.phoneNumber=phoneNumber;
     }
-    public void setPassWord(){
+    public void setPassWord(String passWord){
        this.passWord=passWord;
     }
-    public void setEmail(){
+    public void setEmail(String email){
        this.email=email;
     }
 
