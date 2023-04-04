@@ -3,10 +3,19 @@ package model.user.buyer;
 import model.request.Request;
 
 public class BalanceIncrease extends Request {
+    private BuyerModel buyer;
     private String cardNumber;
     private String PassWord;
     private String cvv2;
     private double balanceIncrease;
+
+    public BuyerModel getBuyer() {
+        return buyer;
+    }
+
+    public void setBuyer(BuyerModel buyer) {
+        this.buyer = buyer;
+    }
 
     public String getCardNumber() {
         return cardNumber;
@@ -40,8 +49,9 @@ public class BalanceIncrease extends Request {
         this.balanceIncrease = balanceIncrease;
     }
 
-    public BalanceIncrease(String cardNumber, String passWord, String cvv2, double balanceIncrease) {
+    public BalanceIncrease(BuyerModel buyer,String cardNumber, String passWord, String cvv2, double balanceIncrease) {
         super();
+        this.buyer=buyer;
         this.cardNumber = cardNumber;
         PassWord = passWord;
         this.cvv2 = cvv2;
