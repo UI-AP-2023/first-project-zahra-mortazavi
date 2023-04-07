@@ -1,18 +1,41 @@
 package view;
 
-import com.sun.org.apache.bcel.internal.generic.SWITCH;
+import controller.buyercontroller.BuyerController;
+import view.buyer.GuestPanel;
+import view.buyer.LongIn;
+import view.buyer.SingUp;
 
 import java.util.Scanner;
 
 public class MainMenu {
-
-   RegisterView registerView=new RegisterView();
-    Scanner s=new Scanner(System.in);
-public String mainMenu(){
-    return "\n1)register\n2)log in\n3)goods";
-}
-int num=s.nextInt();
-if(num==1){
-    registerView.register();
+    private MainMenu() {
     }
+private static MainMenu mainMenu=new MainMenu();
+
+    public static MainMenu getMainMenu() {
+        return mainMenu;
+    }
+
+    Scanner s=new Scanner(System.in);
+    public  void showMainMenu(){
+        System.out.println( "\n1)sign up\n2)log in\n3)shop");
+
+String num=s.nextLine();
+
+if(num.equals("1")){
+
+    SingUp.getSingUp().signUpBuyer();
 }
+        if(num.equals("2")){
+            BuyerController.getBuyerController().setUserType(BuyerController.UserType.BUYER);
+
+            LongIn.getLongIn().userLongIn();
+        }
+        if (num.equals("3")){
+            BuyerController.getBuyerController().setUserType(BuyerController.UserType.GUEST);
+
+            GuestPanel.getGuestPanel().showGuestPanel();
+        }
+
+    }}
+
