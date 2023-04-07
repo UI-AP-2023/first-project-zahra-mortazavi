@@ -1,10 +1,13 @@
 package controller.buyercontroller;
 
 import controller.admincontroller.AdminController;
+import controller.goodscontroller.GoodsController;
+import model.goods.GoodsModel;
 import model.request.Request;
 import model.user.UserModel;
 import model.user.buyer.BalanceIncrease;
 import model.user.buyer.BuyerModel;
+import model.user.buyer.PurchaseInvoiceModel;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -285,6 +288,53 @@ return "your request sent to admin!";
         BalanceIncrease balanceIncrease=new BalanceIncrease(buyers.get(usersIndex),cardNumber,passWord,cardCvv2,balanceIncrease1);
         AdminController.getRequests().add(balanceIncrease);
     }
+    public StringBuilder showCart(){
+        StringBuilder cartGoods=new StringBuilder();
+        for (GoodsModel goods:buyers.get(usersIndex).getCart()){
+            cartGoods.append((buyers.get(usersIndex).getCart().indexOf(goods)+1)+")\n"+goods.toString()+"\n");
+        }
+        return cartGoods;
+    }
+    public void removeGoods(int index){
+        buyers.get(usersIndex).getCart().remove((index-1));
+    }
+    public void addGoodsToCart(int number){
+        buyers.get(usersIndex).getCart().add(GoodsController.getGoodsList().get(GoodsController.getSelectedGoodsIndex()));
+        buyers.get(usersIndex).getCart().get((buyers.get(usersIndex).getCart().size()-1)).setGoodsInventory(number);
+        }
+     public String showPurchaseInvoice(){
+        StringBuilder allPurchaseInvoice=new StringBuilder();
+        for (PurchaseInvoiceModel purchaseInvoice:buyers.get(usersIndex).getPurchaseHistory()){
+            allPurchaseInvoice.append(purchaseInvoice.toString());
+        }
+        return allPurchaseInvoice.toString();
+     }
+     private double totalPrice;
+     public String buyGoods(){
+         totalPrice=0;
+        for (GoodsModel goods :buyers.get(usersIndex).getCart()){
+            for (GoodsModel goods1:GoodsController.getGoodsList()){
+                if (goods.getGoodsId()==goods1.getGoodsId()){
+                    if (goods.getGoodsInventory()>goods1.getGoodsInventory()){
+                        return goods.getGoodsName()+" is not available  enough in the shop !";
+                    }
+                }
+            }
+        }
+         for (GoodsModel goods :buyers.get(usersIndex).getCart()){
+             totalPrice=totalPrice+(goods.getGoodsPrice()*goods.getGoodsInventory());
+         }
+        if (totalPrice>buyers.get(usersIndex).getUserAccountBalance()){
+            return "your Account Balance is insufficient !";
+        }
+         for (GoodsModel goods :buyers.get(usersIndex).getCart()){
+             for (GoodsModel goods1:GoodsController.getGoodsList()){
+                 if (goods.getGoodsId()==goods1.getGoodsId()){
+                  goods1.setGoodsInventory( ( goods1.getGoodsInventory()-goods.getGoodsInventory()));}}}
+         buyers.get(usersIndex).setUserAccountBalance(buyers.get(usersIndex).getUserAccountBalance()-totalPrice);
+                     PurchaseInvoiceModel purchaseInvoice=new PurchaseInvoiceModel("1402/18/1",totalPrice,buyers.get(usersIndex).getCart());
+         buyers.get(usersIndex).getPurchaseHistory().add(purchaseInvoice);
+         return "youre Purchase was successful !";
+     }
+    }
 
-
-}
