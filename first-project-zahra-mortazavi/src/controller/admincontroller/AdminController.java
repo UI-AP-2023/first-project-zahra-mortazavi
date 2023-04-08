@@ -252,7 +252,7 @@ public int acceptRequest(String order[]){
                 index1=requests.indexOf(request);
                 if (request instanceof UserModel){
                     BuyerController.getBuyers().add(((BuyerModel) request));
-
+                 
                 }
               if (request instanceof  CommentModel){
                   for (GoodsModel goods:GoodsController.getGoodsController().getGoodsList()){

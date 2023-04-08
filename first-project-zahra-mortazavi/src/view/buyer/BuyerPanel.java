@@ -1,6 +1,7 @@
 package view.buyer;
 
 import view.MainMenu;
+import view.goods.Shop;
 
 import java.util.Scanner;
 

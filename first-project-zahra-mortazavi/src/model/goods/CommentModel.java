@@ -54,6 +54,7 @@ public class CommentModel extends Request{
     public String toString() {
         return     "\nname="+buyerModel.getUserName() +
                 "\ngoodsId=" + goodsId +
+                "\nbought by user=" + purchaseStatus +
                 "\ncommentText='" + commentText + '\'' ;
     }
 }

@@ -1,7 +1,9 @@
-package view.buyer;
+package view.goods;
 
 import controller.buyercontroller.BuyerController;
 import controller.goodscontroller.GoodsController;
+import view.buyer.BuyerPanel;
+import view.buyer.GuestPanel;
 
 import java.util.Scanner;
 

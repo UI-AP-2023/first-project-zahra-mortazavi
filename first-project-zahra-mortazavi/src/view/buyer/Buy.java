@@ -1,6 +1,7 @@
 package view.buyer;
 
 import controller.buyercontroller.BuyerController;
+import view.goods.Shop;
 
 import java.util.Scanner;
 
@@ -29,7 +30,7 @@ public class Buy {
                 System.out.println(BuyerController.getBuyerController().buyGoods());
                 Shop.getShop().showShop();
             }
-            if (answer.equals("oo")){
+            if (answer.equals("5")){
                 SingUp.getSingUp().signUpBuyer();
             }
 

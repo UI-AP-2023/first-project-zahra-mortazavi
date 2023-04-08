@@ -166,7 +166,7 @@ public class BuyerController {
     public String creatAccountRequest() {
         BuyerModel buyer = new BuyerModel(userName, accountPassWord, email, phoneNumber1);
         buyer.setCart(guestCart);
-        guestCart.clear();
+
         AdminController.getRequests().add(buyer);
         return "your request sent to admin!";
     }
@@ -323,9 +323,46 @@ public class BuyerController {
     }
 
     public void addGoodsToCart(int number) {
+        guestCart.clear();
         if (userType == UserType.GUEST) {
-            guestCart.add(GoodsController.getGoodsList().get(GoodsController.getSelectedGoodsIndex()));
-            guestCart.get((buyers.get(usersIndex).getCart().size() - 1)).setGoodsInventory(number);
+            GoodsModel goods = GoodsController.getGoodsList().get(GoodsController.getSelectedGoodsIndex());
+            if (goods instanceof Car) {
+                Car car = new Car(goods.getGoodsName(), goods.getGoodsPrice(), number, ((Car) goods).getManufacturingCompany(), ((Car) goods).getCarEngineVolume(), ((Car) goods).isAutomaticCar());
+               guestCart.add(car);
+            }
+
+            if (goods instanceof Bike) {
+                Bike bike = new Bike(goods.getGoodsName(), goods.getGoodsPrice(), number, ((Bike) goods).getManufacturingCompany(), ((Bike) goods).getBikeType());
+                guestCart.add(bike);
+            }
+            if (goods instanceof Ssd) {
+                Ssd ssd = new Ssd(goods.getGoodsName(), goods.getGoodsPrice(), number, ((Ssd) goods).getWeight(), ((Ssd) goods).getDimensions(), ((Ssd) goods).getMemoryCapacity(), ((Ssd) goods).getReadingSpeed(), ((Ssd) goods).getWritingSpeed());
+                guestCart.add(ssd);
+            }
+            if (goods instanceof FlashMemory) {
+                FlashMemory flashMemory = new FlashMemory(goods.getGoodsName(), goods.getGoodsPrice(), number, ((FlashMemory) goods).getWeight(), ((FlashMemory) goods).getDimensions(), ((FlashMemory) goods).getMemoryCapacity(), ((FlashMemory) goods).getFlashMemoryType());
+                guestCart.add(flashMemory);
+            }
+            if (goods instanceof Pc) {
+                Pc pc = new Pc(goods.getGoodsName(), goods.getGoodsPrice(), number, ((Pc) goods).getWeight(), ((Pc) goods).getDimensions(), ((Pc) goods).getCpuModel(), ((Pc) goods).getRamCapacity());
+                guestCart.add(pc);
+            }
+            if (goods instanceof NoteBook) {
+                NoteBook noteBook = new NoteBook(goods.getGoodsName(), goods.getGoodsPrice(), number, ((NoteBook) goods).getProducingCountry(), ((NoteBook) goods).getPageNum(), ((NoteBook) goods).getPaperType());
+                guestCart.add(noteBook);
+            }
+            if (goods instanceof Pencil) {
+                Pencil pencil = new Pencil(goods.getGoodsName(), goods.getGoodsPrice(), number, ((Pencil) goods).getProducingCountry(), ((Pencil) goods).getPencilType());
+                guestCart.add(pencil);
+            }
+            if (goods instanceof Pen) {
+                Pen pen = new Pen(goods.getGoodsName(), goods.getGoodsPrice(), number, ((Pen) goods).getProducingCountry(), ((Pen) goods).getPenColor());
+                guestCart.add(pen);
+            }
+            if (goods instanceof Edible) {
+                Edible edible = new Edible(goods.getGoodsName(), goods.getGoodsPrice(), number, ((Edible) goods).getEdibleP(), ((Edible) goods).getEdibleExp());
+                guestCart.add(edible);
+            }
         } else {
             GoodsModel goods = GoodsController.getGoodsList().get(GoodsController.getSelectedGoodsIndex());
             if (goods instanceof Car) {
@@ -380,7 +417,7 @@ public class BuyerController {
 
     public String buyGoods() {
         if (userType == UserType.GUEST) {
-            return "sorry you havent account ! if you wanna creat an account enter \"00\"";
+            return "sorry you havent account ! if you wanna creat an account enter \"5\"";
         }
         double totalPrice = 0;
         for (GoodsModel goods : buyers.get(usersIndex).getCart()) {
