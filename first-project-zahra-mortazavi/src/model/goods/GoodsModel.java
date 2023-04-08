@@ -3,26 +3,45 @@ package model.goods;
 import java.util.ArrayList;
 
 abstract public class GoodsModel {
-
-    private static int goodsId=0;
+    private  int goodsId;
+    private static int mainGoodsId =0;
 private String goodsName;
 private double goodsPrice;
 private int goodsInventory;
       private double goodsScore;
+      private ArrayList<ScoreModel>scores;
       private ArrayList<CommentModel>comment;
       final private GoodsCategoryModel goodsCategoryModel;
 
-    protected GoodsModel(String goodsName, double goodsPrice, int goodsInventory,  GoodsCategoryModel goodsCategoryModel) {
+
+
+    protected GoodsModel(String goodsName, double goodsPrice, int goodsInventory, GoodsCategoryModel goodsCategoryModel) {
         this.goodsName = goodsName;
         this.goodsCategoryModel = goodsCategoryModel;
         this.goodsPrice = goodsPrice;
         this.goodsInventory = goodsInventory;
         this.comment = new ArrayList<CommentModel>();
+        this.scores=new ArrayList<ScoreModel>();
+        this.mainGoodsId++;
+        this.goodsId=mainGoodsId;
 
-        this.goodsId+=1;
     }
 
-    public static int getGoodsId() {
+
+    public ArrayList<ScoreModel> getScores() {
+        return scores;
+    }
+
+    public void setScores(ArrayList<ScoreModel> scores) {
+        this.scores = scores;
+    }
+
+    public static int getMainGoodsId() {
+        return mainGoodsId;
+    }
+
+
+    public  int getGoodsId() {
         return goodsId;
     }
 
@@ -74,13 +93,13 @@ private int goodsInventory;
 
     @Override
     public String toString() {
-        return "\ngoodsName='" + goodsName + '\'' +
+
+        return "\ngoodsID='" + goodsId + '\'' +
+                "\ngoodsName='" + goodsName + '\'' +
                 "\ngoodsCategoryModel=" + goodsCategoryModel +
                 "\ngoodsPrice=" + goodsPrice +
-                "\ngoodsInventory=" + goodsInventory +
+                "\ngoodsNumber=" + goodsInventory +
                 "\ngoodsScore=" + goodsScore
-
-
                 ;
     }
 

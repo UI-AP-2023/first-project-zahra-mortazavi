@@ -20,16 +20,21 @@ public class BuyerModel extends UserModel {
    public ArrayList<GoodsModel>getCart(){
        return cart;
    }
-   double getUserAccountBalance(){
+
+    public void setCart(ArrayList<GoodsModel> cart) {
+        this.cart = cart;
+    }
+
+    public double getUserAccountBalance(){
        return userAccountBalance;
    }
-   void setUserAccountBalance(double balance){
+   public void setUserAccountBalance(double balance){
        this.userAccountBalance=balance;
    }
 
     @Override
     public String toString() {
-        return
+        return super.toString()+
                 "\nuserAccountBalance=" + userAccountBalance
                 ;
     }

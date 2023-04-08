@@ -14,16 +14,16 @@ public class GuestPanel {
         return guestPanel;
     }
     public void showGuestPanel(){
-    String check;
+    String answer;
         System.out.println("\n1)shop\n2)show cart\n3)back");
-    check=sc.nextLine();
-        if (check.equals("1")){
+        answer=sc.nextLine();
+        if (answer.equals("1")){
             Shop.getShop().showShop();
         }
-        if (check.equals("2")){
+        if (answer.equals("2")){
             Buy.getBuy().buyGoods();
     }
-        if (check.equals("3")){
+        if (answer.equals("3")){
         MainMenu.getMainMenu().showMainMenu();
     }
 

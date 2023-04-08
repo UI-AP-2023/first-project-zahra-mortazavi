@@ -33,7 +33,7 @@ public class PurchaseHistory {
                 System.out.println("invalid information!");
 
             System.out.println("2)back");
-            String check2=sc.nextLine();
+            String answer=sc.nextLine();
             BuyerPanel.getBuyerPanel().showBuyerPanel();
         };
           if (order.equals("0"))

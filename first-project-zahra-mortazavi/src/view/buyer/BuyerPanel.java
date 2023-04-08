@@ -17,25 +17,25 @@ public class BuyerPanel {
     }
 
     public void showBuyerPanel() {
-        String check;
+        String answer;
         System.out.println("1)show and edit account information\n2)shop\n3)show cart\n4)increase account balance\n5)show Purchase History\n6)back");
-        check = sc.nextLine();
-        if (check.equals("1")) {
+        answer = sc.nextLine();
+        if (answer.equals("1")) {
             EditInfo.getEditInfo().editAccountInfo();
         }
-        if (check.equals("2")) {
+        if (answer.equals("2")) {
             Shop.getShop().showShop();
         }
-        if (check.equals("3")) {
+        if (answer.equals("3")) {
             Buy.getBuy().buyGoods();
         }
-        if (check.equals("4")) {
+        if (answer.equals("4")) {
             IncreaseAccountBalance.getIncreaseAccountBalance().increaseBalance();
         }
-        if (check.equals("5")) {
+        if (answer.equals("5")) {
             PurchaseHistory.getPurchaseHistory().showPurchaseHistory();
         }
-        if (check.equals("6")) {
+        if (answer.equals("6")) {
             MainMenu.getMainMenu().showMainMenu();
         }
     }

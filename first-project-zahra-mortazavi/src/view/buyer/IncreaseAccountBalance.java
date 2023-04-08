@@ -16,49 +16,49 @@ public class IncreaseAccountBalance {
     }
     public void increaseBalance(){
             int check=0;
-            int check2=0;
+            int counter=0;
             do{
-                if (check2>0)
+                if (counter>0)
                     System.out.println("please try again");
                 System.out.println("please enter your card number");
 
                 check= BuyerController.getBuyerController().checkCardNumber(sc.nextLine());
-                check2++;
+                counter++;
             }while (check==0);
-            check2=0;
+        counter=0;
             do{
-                if (check2>0)
+                if (counter>0)
                     System.out.println("please try again");
                 System.out.println("please enter your CVV2");
 
                 check= BuyerController.getBuyerController().checkCvv2(sc.nextLine());
-                check2++;
+                counter++;
             }while (check==0);
-            check2=0;
+        counter=0;
             do{
-                if (check2>0)
+                if (counter>0)
                     System.out.println("please try again");
                 System.out.println("please enter your password");
 
                 check= BuyerController.getBuyerController().checkAccountPassWord(sc.nextLine());
-                check2++;
+                counter++;
             }while (check==0);
-            check2=0;
+        counter=0;
             do{
-                if (check2>0)
+                if (counter>0)
                     System.out.println("please try again");
                 System.out.println("please enter your balance increase");
 
                 check= BuyerController.getBuyerController().checkBalanceIncrease(sc.nextDouble());
-                check2++;
+                counter++;
             }while (check==0);
-            check2=0;
+        counter=0;
             System.out.println("1)send Balance Increase request to admin\n" +
                     "2)back");
         int order=sc.nextInt();
         if(order==1)
         { BuyerController.getBuyerController().requestBalanceIncrease();
-            System.out.println("your request sent to admin");
+            System.out.println("your request sent to admin And back");
            String num= sc.nextLine();
             BuyerPanel.getBuyerPanel().showBuyerPanel();  }
 

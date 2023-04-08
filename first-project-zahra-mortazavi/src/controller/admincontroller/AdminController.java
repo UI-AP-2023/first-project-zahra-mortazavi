@@ -40,49 +40,76 @@ public class AdminController {
     public String help(){
         return"\nadd car:\nadd goodsName goodsPrice goodsInventory manufacturingCompany carEngineVolume automaticCar\n" +
                 "add bike:\nadd goodsName goodsPrice goodsInventory manufacturingCompany bikeType\n" +
-                "add notebook:\nadd goodsName goodsPrice goodsInventory producingCountry pageNum paperType\n" +
+                "bikeType:(MOUNNTAINBIKE,CITYBIKE,HYBRIDEBIKE,ROADBIKE)\n" +
+                "add notebook:\nadd goodsName goodsPrice goodsInventory producingCountry.pageNum.paperType\n" +
+                "paperType :(FIBERGLASS,PLAINPAPAER,OILPAPER,STRAWPAPER)\n" +
                 "add pen:\nadd goodsName goodsPrice goodsInventory producingCountry penColor\n" +
                 "add pencil:\nadd goodsName goodsPrice goodsInventory producingCountry pencilType\n" +
+                "pencilType :(H2,H,HB,F,B)\n" +
                 "add edible:\nadd goodsName goodsPrice goodsInventory edibleP edibleExp\n" +
-                "add ssd:\nadd goodsName goodsPrice goodsInventory weight dimensions memoryCapacity readingSpeed writingSpeed\n" +
+                "add ssd:\nadd goodsName goodsPrice goodsInventory weight dimensions memoryCapacity readingSpeed writingSpeed)\n" +
                 "add pc:\nadd goodsName goodsPrice goodsInventory weight dimensions cpuModel ramCapacity\n" +
+                "cpuModel:SINGLECORE,DUALCORECPU,QUADCORECPU,HEXACOREPROCESSORS,OCTACOREPROCESSORS,DECACOREPROCESSORS)\n" +
                 "add flash:\nadd goodsName goodsPrice goodsInventory weight dimensions memoryCapacity flashMemoryType\n" +
-                "showgoods\n" +
+                "flashMemoryType:(USBA,USBB,MICROUSB,MINIUSB,USBC)\n" +
+                "show goods:\nshowgoods\n" +
                 "edit name:\nedit goodsID NAME newgoodsname\n" +
                 "edit price:\nedit goodsID PRICE newgoodsprice\n" +
                 "edit inventory:\nedit goodsID INVENTORY newgoodsinventory\n" +
                 "delete:\ndelete goodsID(you can add more than one ID)\n" +
-                "showreq\n" +
-                "req accept requestID(you can add more than one ID)\n" +
-                "req reject requestID(you can add more than one ID)\n";}
-    public int findOrder(String orders){
+                "show request:\nshowreq\n" +
+                "accept request:\nreq accept requestID(you can add more than one ID)\n" +
+                "reject request:\nreq reject requestID(you can add more than one ID)\n" +
+                "exit";}
+    public String findOrder(String orders){
         String order[]=orders.split(" ");
         if (order[0].equals("add")){
-            addGoods(order);
-            return 1;
+           if (addGoods(order)==0)
+               return "invalid order!";
+           else
+            return "done!";
         }
          if (order[0].equals("showgoods")){
-             showGoodsToAdmin();
-             return 1;
+
+             return showGoodsToAdmin();
+
         }
          if (order[0].equals("edit")){
-             editGoods(order);
-             return 1;
+             if (editGoods(order)==0)
+                 return "invalid order!";
+             else
+                 return "done!";
+
+
         }
          if (order[0].equals("delete")){
-             deleteGoods( order);
-             return 1;
+             if (deleteGoods( order)==0)
+                 return "invalid order!";
+             else
+                 return "done!";
+
+
+
         }
          if (order[0].equals("req")){
-             findRequestType(order);
-             return 1;
+             if (findRequestType(order)==0)
+                 return "invalid order!";
+             else
+                 return "done!";
+
+
+
         }
         if (order[0].equals("showreq")){
-            showRequest();
-            return 1;
+
+            return showRequest();
+        }
+        if (order[0].equals("help")){
+
+            return  help();
         }
         else
-            return 0;
+            return "invalid order!";
     }
 public int addGoods( String order[]){
         if (order[1].contains("car")){
@@ -120,7 +147,7 @@ public int addGoods( String order[]){
         GoodsController.getGoodsController().getGoodsList().add(flashMemory);
         return 1;
     }
-    if (order[1].contains("note book")){
+    if (order[1].contains("notebook")){
         NoteBook noteBook=new NoteBook(order[1],Double.parseDouble(order[2]),Integer.parseInt(order[3]),order[4],Integer.parseInt(order[5]), PaperType.valueOf(order[6]));
         GoodsController.getGoodsController().getGoodsList().add(noteBook);
         return 1;
@@ -173,32 +200,34 @@ private int counter;
     public int deleteGoods(String order[]){
         counter=0;
         for (int i = 1; i < order.length; i++) {
-
+int index2=0;
         for (GoodsModel goods:GoodsController.getGoodsController().getGoodsList()){
             if (goods.getGoodsId()==Integer.parseInt(order[i])){
-                GoodsController.getGoodsController().getGoodsList().remove(goods);
+                index2=GoodsController.getGoodsController().getGoodsList().indexOf(goods);
                counter++;
-            }}}
+            }}
+            GoodsController.getGoodsController().getGoodsList().remove(index2);
+        }
             if (counter==(order.length-1)){
                 return 1;
             }
 else
     return 0;
 }
-public StringBuilder showRequest(){
+public String showRequest(){
     StringBuilder allRequests=new StringBuilder();
     for (Request request:requests){
-        allRequests.append(requests.indexOf(request)+")");
+        allRequests.append((requests.indexOf(request)+1)+")\nrequestID : "+request.getRequestId()+"\n");
         if (request instanceof UserModel){
-            allRequests.append("sing up request :\n"+((UserModel) request).toString());}
+            allRequests.append("sing up request :"+((UserModel) request).toString());}
             if (request instanceof CommentModel){
-                allRequests.append("comment request :\n"+((CommentModel) request).toString());
+                allRequests.append("comment request :"+((CommentModel) request).toString());
         }
         if (request instanceof BalanceIncrease){
             allRequests.append(((BalanceIncrease) request).toString());
         }
     }
-    return allRequests;
+    return allRequests.toString();
 }
 public int findRequestType(String order[]){
         if (order[1].equals("accept")){
@@ -206,7 +235,7 @@ public int findRequestType(String order[]){
             return 1;
         }
     if (order[1].equals("reject")){
-
+rejectRequest(order);
         return 1;
     }
     else
@@ -215,10 +244,12 @@ public int findRequestType(String order[]){
 private int counter2;
 public int acceptRequest(String order[]){
     counter2=0;
+    int index1=0;
     for (int i = 2; i <order.length ; i++) {
         for (Request request:requests){
             if (request.getRequestId()==Integer.parseInt(order[i])){
                 counter2++;
+                index1=requests.indexOf(request);
                 if (request instanceof UserModel){
                     BuyerController.getBuyers().add(((BuyerModel) request));
 
@@ -244,6 +275,10 @@ public int acceptRequest(String order[]){
                 }
 
             }
+
+requests.remove(index1);
+
+
     }
     if (counter2==order.length-2){
         return 1;
@@ -254,14 +289,17 @@ public int acceptRequest(String order[]){
 int counter3;
 public int rejectRequest(String order[]){
     counter3=0;
+    int index2=0;
     for (int i = 2; i < order.length; i++) {
         for (Request request:requests){
             if (request.getRequestId()==Integer.parseInt(order[i])){
-                requests.remove(request);
+                index2=requests.indexOf(request);
                 counter3++;
             }
         }
+        requests.remove(index2);
     }
+
     if (counter3==order.length-2){
         return 1;
     }

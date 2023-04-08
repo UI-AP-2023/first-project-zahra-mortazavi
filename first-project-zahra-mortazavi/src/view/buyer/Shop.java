@@ -17,17 +17,17 @@ public class Shop {
 
     public void showShop() {
         System.out.println("\n1)select a good\n2)search\n3)filter\n4)back" + GoodsController.getGoodsController().showAllGoods());
-        String num=sc.nextLine();
-        if (num.equals("1")){
+        String answer3=sc.nextLine();
+        if (answer3.equals("1")){
             String num2=sc.nextLine();
             GoodsController.getGoodsController().findSelectedGoods((Integer.parseInt(num2)));
             showSelectedGoods();
         }
-        if (num.equals("2")){
+        if (answer3.equals("2")){
             System.out.println("please enter a word");
             search(sc.nextLine());
         }
-        if (num.equals("3")){
+        if (answer3.equals("3")){
             System.out.println("filter by\n1)Category\n2)inventory\n3)price\n4)score");
             String answer=sc.nextLine();
             if (answer.equals("1")) {
@@ -48,7 +48,7 @@ public class Shop {
             }
         }
 
-if (num.equals("4")){
+if (answer3.equals("4")){
     if (BuyerController.getBuyerController().getUserType()== BuyerController.UserType.GUEST)
         GuestPanel.getGuestPanel().showGuestPanel();
     else
@@ -58,86 +58,86 @@ if (num.equals("4")){
 
     }
     void showSelectedGoods (){
-        String num;
+        String answer;
         System.out.println(GoodsController.getGoodsController().showSelectedGoods());
         do {
-             num=sc.nextLine();
-            if (num.equals("1")){
+            answer=sc.nextLine();
+            if (answer.equals("1")){
                 System.out.println("enter number of goods that you want");
 
                 BuyerController.getBuyerController().addGoodsToCart(Integer.parseInt(sc.nextLine()));
             }
-            if (num.equals("2")){
+            if (answer.equals("2")){
                 System.out.println(GoodsController.getGoodsController().showSelectedGoodsComments());
             }
-            if (num.equals("3")){
+            if (answer.equals("3")){
                 System.out.println("please write comment text here");
                 GoodsController.getGoodsController().commentRequest(sc.nextLine());
             }
-            if (num.equals("4")){
+            if (answer.equals("4")){
                 System.out.println("please enter score here");
                 GoodsController.getGoodsController().addScore(sc.nextLine());
             }
-        }while (num.equals("0")==false);
+        }while (answer.equals("0")==false);
        showShop();
     }
     void search (String word){
         System.out.println("\n1)select a good\n2)back"+GoodsController.getGoodsController().search(word));
-        String num=sc.nextLine();
-        if (num.equals("1")){
-            String num2=sc.nextLine();
-            GoodsController.getGoodsController().findFilterGoodsIndex(Integer.parseInt(num2));
+        String answer=sc.nextLine();
+        if (answer.equals("1")){
+            String answer2=sc.nextLine();
+            GoodsController.getGoodsController().findFilterGoodsIndex(Integer.parseInt(answer2));
             showSelectedGoods();
         }
-        if (num.equals("2")){
+        if (answer.equals("2")){
             showShop();
         }
     }
     void filterByPrice (double price1,double price2){
         System.out.println("\n1)select a good\n2)back"+GoodsController.getGoodsController().filterByPrice(price1,price2));
-        String num=sc.nextLine();
-        if (num.equals("1")){
-            String num2=sc.nextLine();
-            GoodsController.getGoodsController().findFilterGoodsIndex(Integer.parseInt(num2));
+        String answer=sc.nextLine();
+        if (answer.equals("1")){
+            String answer2=sc.nextLine();
+            GoodsController.getGoodsController().findFilterGoodsIndex(Integer.parseInt(answer2));
             showSelectedGoods();
         }
-        if (num.equals("2")){
+        if (answer.equals("2")){
             showShop();
         }
     }
     void filterByScore (double score1,double score2){
         System.out.println("\n1)select a good\n2)back"+GoodsController.getGoodsController().filterByScore(score1,score2));
-        String num=sc.nextLine();
-        if (num.equals("1")){
-            String num2=sc.nextLine();
-            GoodsController.getGoodsController().findFilterGoodsIndex(Integer.parseInt(num2));
+        String answer=sc.nextLine();
+        if (answer.equals("1")){
+            String answer2=sc.nextLine();
+            GoodsController.getGoodsController().findFilterGoodsIndex(Integer.parseInt(answer2));
             showSelectedGoods();
         }
-        if (num.equals("2")){
+        if (answer.equals("2")){
             showShop();
         }
     }
     void filterByInventory (){
         System.out.println("\n1)select a good\n2)back"+GoodsController.getGoodsController().filterByInventory());
-        String num=sc.nextLine();
-        if (num.equals("1")){
-            String num2=sc.nextLine();
-            GoodsController.getGoodsController().findFilterGoodsIndex(Integer.parseInt(num2));
+        String answer=sc.nextLine();
+        if (answer.equals("1")){
+            String answer2=sc.nextLine();
+            GoodsController.getGoodsController().findFilterGoodsIndex(Integer.parseInt(answer2));
             showSelectedGoods();
         }
-        if (num.equals("2")){
+        if (answer.equals("2")){
             showShop();
         }
     }
     void filterByCategory(int number){
         System.out.println("\n1)select a good\n2)filter  by type\n3)back"+GoodsController.getGoodsController().filterCategory(number));
-        String num=sc.nextLine();
-        if (num.equals("1")){
-            String num2=sc.nextLine();
-            GoodsController.getGoodsController().findFilterGoodsIndex(Integer.parseInt(num2));
+        String answer=sc.nextLine();
+        if (answer.equals("1")){
+            String answer2=sc.nextLine();
+            GoodsController.getGoodsController().findFilterGoodsIndex(Integer.parseInt(answer2));
             showSelectedGoods();
         }
-        if (num.equals("2")){
+        if (answer.equals("2")){
             if(number==1){
                 System.out.println("\n1)pc\n2)SSD\n3)flash");
                 filterDigitalGoods(Integer.parseInt(sc.nextLine()));
@@ -151,11 +151,15 @@ if (num.equals("4")){
                 filterVehicle(Integer.parseInt(sc.nextLine()));
             }
         }
-        if (num.equals("3")){
+        if (answer.equals("3")){
             showShop();
     }}
         void filterDigitalGoods (int number){
-            System.out.println("\n1)select a good\n2)back"+GoodsController.getGoodsController().filterDigitalGoods(number));
+            if ((number == 1)||(number == 3)) {
+                System.out.println("\n1)select a good\n2)filter\n0)back"+GoodsController.getGoodsController().filterStationary(number));
+            }
+            else
+            {System.out.println("\n1)select a good\n0)back"+GoodsController.getGoodsController().filterDigitalGoods(number));}
             String num=sc.nextLine();
             if (num.equals("1")){
                 String num2=sc.nextLine();
@@ -163,31 +167,126 @@ if (num.equals("4")){
                 showSelectedGoods();
             }
             if (num.equals("2")){
+                if (number==1)
+                { System.out.println("\n1)Single-core CPU,\n2)Dual-core CPU,\n3)Quad-core CPU,\n4)Hexa Core processors,\n5)Octa-core processors,\n6)Deca-core processor");
+                String number4=sc.nextLine();
+                filterPc(Integer.parseInt(number4));}
+                if (number==3)
+                {   System.out.println("\n1)USB-A\n2)USB-B\n3)USB-C\n4)Mini USB\n5)Micro USB");
+                String number4=sc.nextLine();
+                filterUsb(Integer.parseInt(number4));
+            }}
+
+            if (num.equals("0")){
                 showShop();
             }
         }
     void filterStationery (int number){
-        System.out.println("\n1)select a good\n2)back"+GoodsController.getGoodsController().filterStationary(number));
-        String num=sc.nextLine();
-        if (num.equals("1")){
+        if (number == 2) {
+            System.out.println("\n1)select a good\n2)filter\n0)back"+GoodsController.getGoodsController().filterStationary(number));
+        }
+        else
+        {System.out.println("\n1)select a good\n0)back"+GoodsController.getGoodsController().filterStationary(number));}
+        String answer=sc.nextLine();
+        if (answer.equals("1")){
             String num2=sc.nextLine();
             GoodsController.getGoodsController().findFilterGoodsIndex(Integer.parseInt(num2));
             showSelectedGoods();
         }
-        if (num.equals("2")){
+        if (answer.equals("2")){
+            System.out.println("\n1)B\n2)H2\n3)F\n4)HB\nH");
+            String number4=sc.nextLine();
+            filterPencil(Integer.parseInt(number4));
+        }
+        if (answer.equals("0")){
             showShop();
         }
     }
     void filterVehicle (int number){
-        System.out.println("\n1)select a good\n2)back"+GoodsController.getGoodsController().filterVehicle(number));
-        String num=sc.nextLine();
-        if (num.equals("1")){
+        System.out.println("\n1)select a good\n2)filter\n0)back"+GoodsController.getGoodsController().filterVehicle(number));
+        String answer2=sc.nextLine();
+        if (answer2.equals("1")){
             String num2=sc.nextLine();
             GoodsController.getGoodsController().findFilterGoodsIndex(Integer.parseInt(num2));
             showSelectedGoods();
         }
-        if (num.equals("2")){
+        if (answer2.equals("2")){
+            if (number==1)
+            {System.out.println("\n1)automatic\n2)not automatic");
+            String number3= sc.nextLine();
+            filterCar(Integer.parseInt(number3));
+            }
+
+            if (number==2){
+                System.out.println("\n1)city bike\n2)mountain bike\n3)hybrid bike\n4)road bike");
+                String number3= sc.nextLine();
+                filterBike(Integer.parseInt(number3));
+            }
+        }
+
+        if (answer2.equals("0")){
             showShop();
         }
     }
+    void filterCar (int number){
+        System.out.println("\n1)select a good\n2)back"+GoodsController.getGoodsController().filterCar(number));
+        String answer2=sc.nextLine();
+        if (answer2.equals("1")){
+            String num2=sc.nextLine();
+            GoodsController.getGoodsController().findFilterGoodsIndex(Integer.parseInt(num2));
+            showSelectedGoods();
+        }
+        if (answer2.equals("2")){
+            showShop();
+        }
+    }
+    void filterBike (int number){
+        System.out.println("\n1)select a good\n2)back"+GoodsController.getGoodsController().filterBikes(number));
+        String answer2=sc.nextLine();
+        if (answer2.equals("1")){
+            String num2=sc.nextLine();
+            GoodsController.getGoodsController().findFilterGoodsIndex(Integer.parseInt(num2));
+            showSelectedGoods();
+        }
+        if (answer2.equals("2")){
+            showShop();
+        }
+    }
+    void filterPc (int number){
+        System.out.println("\n1)select a good\n2)back"+GoodsController.getGoodsController().filterPc(number));
+        String answer2=sc.nextLine();
+        if (answer2.equals("1")){
+            String num2=sc.nextLine();
+            GoodsController.getGoodsController().findFilterGoodsIndex(Integer.parseInt(num2));
+            showSelectedGoods();
+        }
+        if (answer2.equals("2")){
+            showShop();
+        }
+    }
+    void filterUsb(int number){
+        System.out.println("\n1)select a good\n2)back"+GoodsController.getGoodsController().filterFlash(number));
+        String answer2=sc.nextLine();
+        if (answer2.equals("1")){
+            String num2=sc.nextLine();
+            GoodsController.getGoodsController().findFilterGoodsIndex(Integer.parseInt(num2));
+            showSelectedGoods();
+        }
+        if (answer2.equals("2")){
+            showShop();
+        }
+    }
+    void filterPencil (int number){
+        System.out.println("\n1)select a good\n2)back"+GoodsController.getGoodsController().filterPencil(number));
+        String answer2=sc.nextLine();
+        if (answer2.equals("1")){
+            String num2=sc.nextLine();
+            GoodsController.getGoodsController().findFilterGoodsIndex(Integer.parseInt(num2));
+            showSelectedGoods();
+        }
+        if (answer2.equals("2")){
+            showShop();
+        }
+    }
+
 }

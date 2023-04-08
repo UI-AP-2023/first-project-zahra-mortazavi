@@ -6,8 +6,8 @@ import model.goods.GoodsModel;
 public class Edible extends GoodsModel {
  final   private String edibleP;
 
-  public Edible(String goodsName, double goodsPrice, int goodsInventory, GoodsCategoryModel goodsCategoryModel, String edibleP, String edibleExp) {
-   super(goodsName, goodsPrice, goodsInventory, goodsCategoryModel);
+  public Edible(String goodsName, double goodsPrice, int goodsInventory,  String edibleP, String edibleExp) {
+   super(goodsName, goodsPrice, goodsInventory, GoodsCategoryModel.EDIBLE);
    this.edibleP = edibleP;
    this.edibleExp = edibleExp;
   }

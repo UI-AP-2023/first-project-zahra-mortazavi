@@ -2,11 +2,17 @@ package model.request;
 
  abstract public class Request {
     public Request() {
-        requestId++;
+        mainRequestId++;
+        this.requestId=mainRequestId;
     }
-    private static int requestId;
+    private  int requestId;
+     private static int mainRequestId=0;
 
-     public static int getRequestId() {
+     public static int getMainRequestId() {
+         return mainRequestId;
+     }
+
+     public  int getRequestId() {
          return requestId;
      }
  }
